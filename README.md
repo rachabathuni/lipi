@@ -1,19 +1,19 @@
-<h1>Lipi Inline Telugu Editor</h1>
+# Lipi Inline Telugu Editor
 Lipi allows you to type in Telugu using the standard RTS transliteration.
 
-<h2>Example</h2>
-To get: <br/>
-లిపి వాడి మీరు తెలుగులో వ్రాయచ్చు
-<br/>
+## Example
+To get:
+> లిపి వాడి మీరు తెలుగులో వ్రాయచ్చు
 Type:
-lipi vADi mIru telugulO vrAyachchu
+`lipi vADi mIru telugulO vrAyachchu`
 
-<h2>Screenshot</h2>
+## Screenshot
+![Lip Screenshot](https://raw.githubusercontent.com/rachabathuni/lipi/main/images/lipi.png)
 
+## Help
+![Telkey Screenshot](https://raw.githubusercontent.com/rachabathuni/lipi/main/images/lipihelp.png)
 
-<h2>Help</h2>
-
-<h2>How to get it</h2>
+## How to get it
 Clone the repo and open index.html in a browser
 
 
