@@ -4,7 +4,9 @@ Lipi allows you to type in Telugu using the standard RTS transliteration.
 ## Example
 To get:
 > లిపి వాడి మీరు తెలుగులో వ్రాయచ్చు
+
 Type:
+
 `lipi vADi mIru telugulO vrAyachchu`
 
 ## Screenshot
