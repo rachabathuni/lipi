@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="te">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Lipi: Online Telugu Unicode Editor</title>
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<script src="jquery-1.8.3.js"></script>
+<script src="jquery-ui-1.9.2.custom.js"></script>
+<script src="rts.js"></script>
+<script src="lipi.js"></script>
+</head>
+
+<body>
+<div id="outer">
+    <div id="header">
+    <h1>&#xc32;&#xc3f;&#xc2a;&#xc3f;/Lipi</h1>
+    </div>
+    <div id="sub-header">
+        <div id="intro-link">
+            <a class="hotspot" href="">
+                <span class="arrow" id="intro-arrow-closed">&#x25BA;</span>
+                <span class="arrow" id="intro-arrow-open">&#x25BC;</span>
+                Introduction
+            </a>
+        </div>
+        <div id="help-link">
+            <a class="hotspot" href="">
+                <span class="arrow" id="help-arrow-closed">&#x25BA;</span>
+                <span class="arrow" id="help-arrow-open">&#x25BC;</span>
+                RTS help
+            </a>
+        </div>
+    </div>
+
+    <div id="intro">
+	<p>
+	sailu.com's Lipi తెలుగులో రాసే సదుపాయం కల్పిస్తుంది. కింద కనిపిస్తున్న డబ్బాలో తెలుగులో రాస్తున్నట్టు రాయండి, మీకు తెలుగు అక్షరాలు కనిపిస్తాయి. ఎలా రాయాలో కింద కొన్ని ఉదాహరణలు చూడండి. ఎంత తేలికో మీకే అర్ధం అవుతుంది. ఈ రాసే పద్దతిని RTS పద్దతి అంటారు‌. పక్కన ఉన్న RTS Helpలో పూర్తి వివరాలు చూడండి.
+	</p>
+	<p>
+మీరు రాసిన తెలుగు వాక్యాలని మార్చచ్చు, తప్పులు సరిదిద్దుకోవచ్చు. మీకు నచ్చినట్టుగా వచ్చాక, మొత్తం copy చేసి మీకు కావలిసిన programలో paste చేసుకోవచ్చు.
+	</p>
+	<p>
+ఈ లిపిని వాడటానికి అధునాతనమైన browser ఉండాలి. సరిగా పని చెయ్యకపోతే మీ browser update అవసరం ఉందేమో చూడగలరు.
+	</p>
+<p>
+మీ సలహాలు, సందేహాలు, విన్నపాలు, చీవాట్లు ఇచ్చటికి పంపగలరు: <a href="mailto:lipi@sailu.com" class="email">lipi@sailu.com</a>. ఈ editorని మరింత మందికి ఉపయోగపడేలా తీర్చిదిద్దేందుకు సహాయపడగలరు.
+</p>
+
+
+
+	<h3>ఉదాహరణలు</h3>
+	<table class="examples">
+		<tr>
+			<td>తెలుగు</td><td>telugu</td>
+		</tr>
+		<tr>
+			<td>పారిజాతము</td>
+			<td>pArijAtamu</td>
+		</tr>
+		<tr>
+			<td>అంతఃపురము</td>
+			<td>amta@hpuramu</td>
+		</tr>
+		<tr>
+			<td>పరాక్రమము</td>
+			<td>parAkramamu</td>
+		</tr>
+		<tr>
+			<td>అక్షౌహిణి</td>
+			<td>akshauhiNi</td>
+		</tr>
+		<tr>
+			<td>ప్రకృతి</td>
+			<td>prakRti</td>
+		</tr>
+		<tr>
+			<td>శాంతిపధము</td>
+			<td>SAmtipadhamu</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td></td>
+		</tr>
+	</table>
+
+	<h3>Intro in English</h3>
+	<p>
+	Sailu.com's Lipi is an online Telugu Unicode text editor. It allows you to write and edit Telugu text right in your browser.
+	</p>
+
+	<p>
+	You can type Telugu using English letters. RTS is a popular transliteration scheme. You can find complete list of letter translations in "RTS Help" section.
+	</p>
+
+	<p>
+	This editor requires a modern browser to work since it uses some of the advanced features of browser.  Please make sure you have the latest version of the browser.
+	</p>
+
+	<p>
+	Please send your feedback, bug reports and feature requests to: <a href="mailto:lipi@sailu.com" class="email">lipi@sailu.com</a>. Please help me make this editor better.
+	</p>
+
+    </div>
+
+    <div id="main">
+        <div id="text">
+            <!-- <form> -->
+                <textarea id="edit" spellcheck="false"></textarea>
+        </div>
+        <div id="help">
+			<!-- achchulu -->
+            <h2>అచ్చులు</h2>
+            <div class="letter">
+                <div class="english">a</div>
+                <div class="telugu">&#xc05;</div>
+            </div>
+            <div class="letter">
+                <div class="english">A</div>
+                <div class="telugu">&#xc06;</div>
+            </div>
+            <div class="letter">
+                <div class="english">i</div>
+                <div class="telugu">&#xc07;</div>
+            </div>
+            <div class="letter">
+                <div class="english">I</div>
+                <div class="telugu">&#xc08;</div>
+            </div>
+            <div class="letter">
+                <div class="english">u</div>
+                <div class="telugu">&#xc09;</div>
+            </div>
+            <div class="letter">
+                <div class="english">U</div>
+                <div class="telugu">&#xc0a;</div>
+            </div>
+            <div class="letter">
+                <div class="english">R</div>
+                <div class="telugu">&#xc0b;</div>
+            </div>
+            <div class="letter">
+                <div class="english">RU</div>
+                <div class="telugu">&#xc60;</div>
+            </div>
+            <div class="letter">
+                <div class="english">e</div>
+                <div class="telugu">&#xc0e;</div>
+            </div>
+            <div class="letter">
+                <div class="english">E</div>
+                <div class="telugu">&#xc0f;</div>
+            </div>
+            <div class="letter">
+                <div class="english">ai</div>
+                <div class="telugu">&#xc10;&#x200c;</div>
+            </div>
+            <div class="letter">
+                <div class="english">o</div>
+                <div class="telugu">&#xc12;</div>
+            </div>
+            <div class="letter">
+                <div class="english">O</div>
+                <div class="telugu">&#xc13;</div>
+            </div>
+            <div class="letter">
+                <div class="english">au</div>
+                <div class="telugu">&#xc14;</div>
+            </div>
+            <div class="letter">
+                <div class="english">aM</div>
+                <div class="telugu">&#xc05;&#xc02;</div>
+            </div>
+            <div class="letter">
+                <div class="english">a@h</div>
+                <div class="telugu">&#xc05;&#xc03;</div>
+            </div>
+
+			<!-- hallulu -->
+            <h2>హల్లులు</h2>
+            <div class="letter">
+                <div class="english">k</div>
+                <div class="telugu">&#xc15;</div>
+            </div>
+            <div class="letter">
+                <div class="english">K, kh</div>
+                <div class="telugu">&#xc16;</div>
+            </div>
+            <div class="letter">
+                <div class="english">g</div>
+                <div class="telugu">&#xc17;</div>
+            </div>
+            <div class="letter">
+                <div class="english">G, gh</div>
+                <div class="telugu">&#xc18;</div>
+            </div>
+            <div class="letter">
+                <div class="english">~m</div>
+                <div class="telugu">&#xc19;</div>
+            </div>
+			<div class="clear"></div>
+            <div class="letter">
+                <div class="english">c, ch</div>
+                <div class="telugu">&#xc1a;</div>
+            </div>
+            <div class="letter">
+                <div class="english">C, Ch</div>
+                <div class="telugu">&#xc1b;</div>
+            </div>
+            <div class="letter">
+                <div class="english">q</div>
+                <div class="telugu">&#xc58;</div>
+            </div>
+            <div class="letter">
+                <div class="english">j</div>
+                <div class="telugu">&#xc1c;</div>
+            </div>
+            <div class="letter">
+                <div class="english">J, jh</div>
+                <div class="telugu">&#xc1d;</div>
+            </div>
+            <div class="letter">
+                <div class="english">z</div>
+                <div class="telugu">&#xc59;</div>
+            </div>
+            <div class="letter">
+                <div class="english">~n</div>
+                <div class="telugu">&#xc1e;</div>
+            </div>
+			<div class="clear"></div>
+            <div class="letter">
+                <div class="english">T</div>
+                <div class="telugu">&#xc1f;</div>
+            </div>
+            <div class="letter">
+                <div class="english">Th</div>
+                <div class="telugu">&#xc20;</div>
+            </div>
+            <div class="letter">
+                <div class="english">D</div>
+                <div class="telugu">&#xc21;</div>
+            </div>
+            <div class="letter">
+                <div class="english">Dh</div>
+                <div class="telugu">&#xc22;</div>
+            </div>
+            <div class="letter">
+                <div class="english">N</div>
+                <div class="telugu">&#xc23;</div>
+            </div>
+			<div class="clear"></div>
+            <div class="letter">
+                <div class="english">t</div>
+                <div class="telugu">&#xc24;</div>
+            </div>
+            <div class="letter">
+                <div class="english">th</div>
+                <div class="telugu">&#xc25;</div>
+            </div>
+            <div class="letter">
+                <div class="english">d</div>
+                <div class="telugu">&#xc26;</div>
+            </div>
+            <div class="letter">
+                <div class="english">dh</div>
+                <div class="telugu">&#xc27;</div>
+            </div>
+            <div class="letter">
+                <div class="english">n</div>
+                <div class="telugu">&#xc28;</div>
+            </div>
+			<div class="clear"></div>
+            <div class="letter">
+                <div class="english">p</div>
+                <div class="telugu">&#xc2a;</div>
+            </div>
+            <div class="letter">
+                <div class="english">ph</div>
+                <div class="telugu">&#xc2b;</div>
+            </div>
+            <div class="letter">
+                <div class="english">b</div>
+                <div class="telugu">&#xc2c;</div>
+            </div>
+            <div class="letter">
+                <div class="english">bh</div>
+                <div class="telugu">&#xc2d;</div>
+            </div>
+            <div class="letter">
+                <div class="english">m</div>
+                <div class="telugu">&#xc2e;</div>
+            </div>
+			<div class="clear"></div>
+            <div class="letter">
+                <div class="english">y</div>
+                <div class="telugu">&#xc2f;</div>
+            </div>
+            <div class="letter">
+                <div class="english">r</div>
+                <div class="telugu">&#xc30;</div>
+            </div>
+            <div class="letter">
+                <div class="english">l</div>
+                <div class="telugu">&#xc32;</div>
+            </div>
+            <div class="letter">
+                <div class="english">v</div>
+                <div class="telugu">&#xc35;</div>
+            </div>
+            <div class="letter">
+                <div class="english">S</div>
+                <div class="telugu">&#xc36;</div>
+            </div>
+            <div class="letter">
+                <div class="english">sh</div>
+                <div class="telugu">&#xc37;</div>
+            </div>
+            <div class="letter">
+                <div class="english">s</div>
+                <div class="telugu">&#xc38;</div>
+            </div>
+            <div class="letter">
+                <div class="english">h</div>
+                <div class="telugu">&#xc39;</div>
+            </div>
+            <div class="letter">
+                <div class="english">L</div>
+                <div class="telugu">&#xc33;</div>
+            </div>
+            <div class="letter">
+                <div class="english">ksha</div>
+                <div class="telugu">&#xc15;&#xc4d;&#xc37;</div>
+            </div>
+            <div class="letter">
+                <div class="english">~r</div>
+                <div class="telugu">&#xc31;</div>
+            </div>
+
+			<!-- pratyekamulu -->
+            <h2>ప్రత్యేకములు</h2>
+			<table class="special">
+				<tr>
+					<td><b>^</b></td>
+					<td>Force split. ఉదాహరణకి "పాన్‌‌డబ్బా‌" రాయాలంటే "pAn^DabbA" అని రాయండి</td>
+				</tr>
+				<tr>
+				<td><b>&amp;</b></td>
+				<td>Force combination. ఉదాహరణకి "తామ్రము" రాయాలంటే "tAm&ramu" అని రాయండి</td>
+			</tr>
+			<tr>
+				<td><b>#</b></td>
+				<td>Switch between Telugu and English. ఉదాహరణకి "ఎర్ర car వచ్చింది" అని రాయాలంటే "erra #car# vachchimdi" అని రాయండి</td>
+			</table>
+        </div>
+    </div>
+
+        <div class="clear"></div>
+
+    <div id="bottom">
+        <div class="bottom-buttons">
+            <a href="" id="font-decrease" class="hotspot"><span id="button">-</span></a>
+            Font
+            <a href="" id="font-increase" class="hotspot"><span id="button">+</span></a>
+        </div>
+        <div class="bottom-buttons" id="autosaveblock">
+            <input type="checkbox" id="autosave"> Save automatically</input>
+        </div>
+        <div class="bottom-buttons" id="savestatus">
+			<span id="saved">Saved</span>
+			<span id="modified">Modified</span>
+        </div>
+    </div>
+
+</div>
+<div id="autosavedialog">
+    <h3>Auto-Save</h3>
+	<p>
+		Auto-save వాడితే మీరు రాసినదంతా ప్రతి కొద్ది క్షణాలకి మీ browserలో save చెయ్యబడుతుంది. మీరు browser మూసివేసినా, మళ్ళీ తెరిచినప్పుడు మీరు రాసినది మళ్ళీ కనిపిస్తుంది. మీరు రాసింది ఈ computerలో మాత్రమే ఉంటుంది అని గమనించగలరు. 
+	</p>
+</div>
+</body>
+
+</html>
+
