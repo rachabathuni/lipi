@@ -102,8 +102,7 @@ function is_consonent(ch) {
 
 
 function is_vowel(ch) {
-	//return ( (ch>=0x0C05 && ch<=0x0C13) || ch==0x0C60 || ch==0x0C61);
-	return ( (ch>=VOW_a && ch<=VOW_R) || ch==VOW_RR || ch==VOW_aloo);
+	return ((ch>=VOW_a && ch<=VOW_R) || ch==VOW_RR || ch==VOW_aloo);
 }
 
 
@@ -416,9 +415,9 @@ function setRtsTextareaCallback(callback) {
 function getCursorPosition() {
 	var el = textarea.get(0);
 	var pos = 0;
-	if('selectionStart' in el) {
+	if ('selectionStart' in el) {
 		pos = el.selectionStart;
-	} else if('selection' in document) {
+	} else if ('selection' in document) {
 		el.focus();
 		var Sel = document.selection.createRange();
 		var SelLength = document.selection.createRange().text.length;
@@ -449,7 +448,7 @@ function replaceCharAtCursor(strToInsert, backspaceChars, effectiveStringLength)
 	// won't jump around. Hack.
 	var lastCrlf = "";
 
-	if( txt[txt.length-1] != "\n") {
+	if (txt[txt.length-1] != "\n") {
 		lastCrlf = "\n";
 	}
 
@@ -460,7 +459,7 @@ function replaceCharAtCursor(strToInsert, backspaceChars, effectiveStringLength)
 }
 
 function isVowel(asciiCode) {
-	if( asciiCode == 65 || asciiCode == 97 ||
+	if (asciiCode == 65 || asciiCode == 97 ||
 	asciiCode == 69 || asciiCode == 101 || 
 	asciiCode == 73 || asciiCode == 105 || 
 	asciiCode == 79 || asciiCode == 111 || 
@@ -503,27 +502,27 @@ function rtsEntry(e, currentCursor) {
 	var output = "";
 	var match_found = 0;
 
-	if(e.which == 0 ) {
+	if (e.which == 0) {
 		return 0;
 	}
 
-	if(input === "#") {
+	if (input === "#") {
 		entryType = ENGLISH_ENTRY;
 		return 1;
 	}
 
-	if( input_sm ) {
-		for(var i=0; i<input_sm.length; i++) {
-			if( (!input_sm[i][0]) || 
-				(typeof input_sm[i][0]=="function" && 
-					input_sm[i][0](ppchar)) || 
-				(input_sm[i][0] === ppchar) ) 
+	if (input_sm) {
+		for (var i=0; i<input_sm.length; i++) {
+			if ((!input_sm[i][0]) || 
+				(typeof input_sm[i][0]=="function" &&
+					input_sm[i][0](ppchar)) ||
+				(input_sm[i][0] === ppchar))
 			{
-				if( (!input_sm[i][1]) || 
+				if ((!input_sm[i][1]) || 
 					(typeof input_sm[i][1]=="function" && input_sm[i][1](pchar)) ||
-					(input_sm[i][1] === pchar) ) 
+					(input_sm[i][1] === pchar))
 				{
-					if( typeof input_sm[i][2] == "function" )
+					if (typeof input_sm[i][2] == "function")
 						output = input_sm[i][2](ppchar, pchar, input);
 					else 
 						output = input_sm[i][2];
@@ -535,18 +534,18 @@ function rtsEntry(e, currentCursor) {
 		}
 	}
 
-	if( !match_found) {
+	if (!match_found) {
 		output = mapping[e.which];
-		if(output) {
+		if (output) {
 			output = output + VIRAMA;
 		}	
 	}
 
 
-	if(match_found || output != 0 ) {
+	if (match_found || output != 0) {
 		var effectiveStringLength = output.length;	
 		//console.log("nchar=[" + nchar + "]");
-		if( nchar && nchar != '\0' && nchar != NON_JOINER && nchar != "" && nchar != "\n"  && nchar != " ") {
+		if (nchar && nchar != '\0' && nchar != NON_JOINER && nchar != "" && nchar != "\n"  && nchar != " ") {
 			// If there is a next char, insert a null so that
 			// we don't combine the current letter with next
 			output = output + NON_JOINER;
@@ -563,7 +562,7 @@ function rtsEntry(e, currentCursor) {
 
 function englishEntry(e, currentCursor) {
 	var input = String.fromCharCode(e.which);
-	if(input === "#") {
+	if (input === "#") {
 		entryType = RTS_ENTRY;
 		return 1;
 	}
@@ -577,17 +576,17 @@ function keyPressed(e) {
 
 	var prevent;
 
-    if( textareaCallback ) {
+    if (textareaCallback) {
         textareaCallback(e);
     }
 
-	if( e.altKey ) {
+	if (e.altKey) {
 		//console.log("alt key");
 		return;
 	}
 
-	if( e.metaKey || e.ctrlKey ) {
-		if( e.whcih == 83 || e.which == 115 ) {
+	if (e.metaKey || e.ctrlKey) {
+		if (e.whcih == 83 || e.which == 115) {
 			//console.log("SAVE");
 			e.preventDefault();
 		}
@@ -595,7 +594,7 @@ function keyPressed(e) {
 		return;
 	}
 
-	if(entryType == RTS_ENTRY) {
+	if (entryType == RTS_ENTRY) {
 		prevent = rtsEntry(e, currentCursor);
 	}
 	else {
@@ -605,7 +604,7 @@ function keyPressed(e) {
 	lastCursor = getCursorPosition();
 	//console.log("oldCursor=" + currentCursor + " newCursor=" + lastCursor );
 
-	if(prevent) {
+	if (prevent) {
 		//console.log("preventing default");
 		e.preventDefault();
 	}
@@ -615,7 +614,7 @@ function dumpValues(from, to) {
 	var text = from.val();
 	var out = "";
 
-	for(var i=0; i<text.length; i++) {
+	for (var i=0; i<text.length; i++) {
 	   out = out + text[i] + "(" + text.charCodeAt(i).toString(16) + ") ";
 	}
 
@@ -624,7 +623,7 @@ function dumpValues(from, to) {
 
 function convertToHtml(text) {
 	out = "";
-	for(var i=0; i<text.length; i++) {
+	for (var i=0; i<text.length; i++) {
 		out = out + "&#x" + text.charCodeAt(i).toString(16) + ";";
 	}
 
