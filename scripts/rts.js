@@ -397,23 +397,100 @@ var mapping = [
 
 
 /* GLOBAL VARIABLES */
-var lastCursor;
-var entryType = RTS_ENTRY;
-var textarea;
-var textareaCallback = null;
+var gEntryType = RTS_ENTRY;
+var gTextarea;
+var gTextareaCallback = null;
 
 // Call this method with a jquery textbox to make the texbox RTS entry
 function setRtsTextarea(tb) {
-	textarea = tb;
-	textarea.keypress(keyPressed);
+	gTextarea = tb;
+	gTextarea.keypress(keyPressed);
+	gTextarea.on('keydown', keyDown);
+}
+
+function keyDown(event) {
+	if (event.key === 'Backspace') {
+		handleBackspace(event);
+	}
+}
+
+function handleBackspace(event) {
+	if (gEntryType == ENGLISH_ENTRY) {
+		return;
+	}
+	else {
+		handleRtsBackspace(event);
+	}
+}
+
+function handleRtsBackspace(event) {
+	let backspaceChars = 0;
+	let newStr = "";
+	let effectiveStringLength = 0;
+	let defaultAction = true;
+
+	// If text area has selection, fall back to default behavior
+	const selStart = gTextarea.get(0).selectionStart;
+	const selEnd = gTextarea.get(0).selectionEnd;
+	if (selStart != selEnd) {
+		return;
+	}
+
+	const currentCursor = getCursorPosition();
+	let pchar1 = getChar(currentCursor-1);
+	let pchar2 = getChar(currentCursor-2);
+	let cchar = getChar(currentCursor);
+
+	// console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
+
+	if (pchar1 == NON_JOINER) {
+		backspaceChars = 1;
+		pchar1 = getChar(currentCursor-2);
+		pchar2 = getChar(currentCursor-3);
+		// console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
+	}
+
+	if (is_consonent(pchar1)) {
+		newStr = VIRAMA;
+		effectiveStringLength = 1;
+		defaultAction = false;
+	}
+	else if (is_extension(pchar1)) {
+		if (is_consonent(pchar2)) {
+			newStr = VIRAMA;
+			effectiveStringLength = 1;
+			backspaceChars += 1;
+			defaultAction = false;
+		}
+	}
+	else if (pchar1 == VIRAMA) {
+		backspaceChars += 2;
+		defaultAction = false;
+	}
+	else {
+		backspaceChars += 1;
+		defaultAction = false;
+	}
+
+	if (cchar != "") {
+		newStr += NON_JOINER;
+		effectiveStringLength += 1;
+	}
+
+	if (!defaultAction) {
+		replaceCharAtCursor(newStr, backspaceChars, effectiveStringLength);
+		event.preventDefault();
+	}
+
+	// dumpTextAreaContent(-1, -1, -1);
 }
 
 function setRtsTextareaCallback(callback) {
-    textareaCallback = callback;
+    gTextareaCallback = callback;
 }
 
 function getCursorPosition() {
-	var el = textarea.get(0);
+	var el = gTextarea.get(0);
 	var pos = 0;
 	if ('selectionStart' in el) {
 		pos = el.selectionStart;
@@ -442,7 +519,7 @@ function setCursorPosition(textarea, pos) {
 
 function replaceCharAtCursor(strToInsert, backspaceChars, effectiveStringLength) {
 	var cur = getCursorPosition();
-	var txt = textarea.val();
+	var txt = gTextarea.val();
 
 	// Let's add a line at the bottom so firefox text
 	// won't jump around. Hack.
@@ -452,10 +529,45 @@ function replaceCharAtCursor(strToInsert, backspaceChars, effectiveStringLength)
 		lastCrlf = "\n";
 	}
 
-	textarea.val( txt.substring(0, cur-backspaceChars) + strToInsert + txt.substring(cur) + lastCrlf);
+	gTextarea.val( txt.substring(0, cur-backspaceChars) + strToInsert
+		+ txt.substring(cur) + lastCrlf);
 	var newCursorPos = cur + effectiveStringLength - backspaceChars;
 	//console.log("new cursor pos: " + newCursorPos);
-	setCursorPosition(textarea, newCursorPos);
+	setCursorPosition(gTextarea, newCursorPos);
+	// dumpTextAreaContent(newCursorPos-1, newCursorPos+1, newCursorPos);
+}
+
+
+function dumpTextAreaContent(start, end, curpos) {
+	const val = gTextarea.val();
+	if (start < 0) {
+		start = 0;
+	}
+	let len;
+	if (end < 0 || end >= val.length) {
+		len = val.length;
+	}
+	else {
+		len = end - start + 1;
+	}
+
+	for (let i=start; i<len; i++) {
+		if (curpos == i) {
+			console.log("--------");
+		}
+		if (val[i] == NON_JOINER) {
+			console.log(i + ": NJ");
+		}
+		else if (val[i] == "\n") {
+			console.log(i + ": NL");
+		}
+		else {
+			console.log(i + ": " + val[i]);
+		}
+		if (curpos == i) {
+			console.log("--------");
+		}
+	}
 }
 
 function isVowel(asciiCode) {
@@ -473,7 +585,7 @@ function isVowel(asciiCode) {
 
 function getChar(pos) {
 	try {
-		return textarea.val()[pos];
+		return gTextarea.val()[pos];
 	}
 	catch(err) {
 		return "";
@@ -492,11 +604,8 @@ function rtsEntry(e, currentCursor) {
 	    ppchar = getChar(currentCursor-3);
 	}
 
-	//console.log("pchar = " + pchar + " ppchar = " + ppchar );
 	var input = String.fromCharCode(e.which);
 	var input_sm = sm[input];
-	//console.log(input_sm);
-	//console.log("input=[" + input + "](" + e.which + ")");
 
 	var replace = 0;
 	var output = "";
@@ -507,7 +616,7 @@ function rtsEntry(e, currentCursor) {
 	}
 
 	if (input === "#") {
-		entryType = ENGLISH_ENTRY;
+		gEntryType = ENGLISH_ENTRY;
 		return 1;
 	}
 
@@ -544,14 +653,12 @@ function rtsEntry(e, currentCursor) {
 
 	if (match_found || output != 0) {
 		var effectiveStringLength = output.length;	
-		//console.log("nchar=[" + nchar + "]");
 		if (nchar && nchar != '\0' && nchar != NON_JOINER && nchar != "" && nchar != "\n"  && nchar != " ") {
 			// If there is a next char, insert a null so that
 			// we don't combine the current letter with next
 			output = output + NON_JOINER;
 		}
 
-		//console.log("replace=" + replace + " output=[" + output + "] typeof=" + (typeof output));
 		replaceCharAtCursor(output, replace+replace_separator, effectiveStringLength);
 		return 1;
 	}
@@ -563,7 +670,7 @@ function rtsEntry(e, currentCursor) {
 function englishEntry(e, currentCursor) {
 	var input = String.fromCharCode(e.which);
 	if (input === "#") {
-		entryType = RTS_ENTRY;
+		gEntryType = RTS_ENTRY;
 		return 1;
 	}
 
@@ -573,39 +680,33 @@ function englishEntry(e, currentCursor) {
 function keyPressed(e) {
 	// TODO: Optimize this. We don't need to call this multiple times
 	var currentCursor = getCursorPosition();
-
 	var prevent;
 
-    if (textareaCallback) {
-        textareaCallback(e);
+    if (gTextareaCallback) {
+        gTextareaCallback(e);
     }
 
 	if (e.altKey) {
-		//console.log("alt key");
 		return;
 	}
 
 	if (e.metaKey || e.ctrlKey) {
 		if (e.whcih == 83 || e.which == 115) {
-			//console.log("SAVE");
 			e.preventDefault();
 		}
 
 		return;
 	}
 
-	if (entryType == RTS_ENTRY) {
+	if (gEntryType == RTS_ENTRY) {
 		prevent = rtsEntry(e, currentCursor);
+		// dumpTextAreaContent(-1, -1, -1);
 	}
 	else {
 		prevent = englishEntry(e, currentCursor);
 	}
 
-	lastCursor = getCursorPosition();
-	//console.log("oldCursor=" + currentCursor + " newCursor=" + lastCursor );
-
 	if (prevent) {
-		//console.log("preventing default");
 		e.preventDefault();
 	}
 }
@@ -620,16 +721,3 @@ function dumpValues(from, to) {
 
 	to.val(out);
 }
-
-function convertToHtml(text) {
-	out = "";
-	for (var i=0; i<text.length; i++) {
-		out = out + "&#x" + text.charCodeAt(i).toString(16) + ";";
-	}
-
-	console.log("out=");
-	console.log(out);
-	return out;
-}
-
-

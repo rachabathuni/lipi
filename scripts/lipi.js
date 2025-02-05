@@ -135,6 +135,7 @@ function ready() {
     $("#copy").click(copy);
 	
 	setRtsTextarea($("#edit"));
+    $('#edit').focus();
 
     initStorage();
 }
