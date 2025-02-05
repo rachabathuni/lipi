@@ -291,10 +291,6 @@ sm.m =
 	[
 		[ "", "~", CONS_INYA+VIRAMA, 1 ],
 		[ "", VIRAMA, CONS_m + VIRAMA, 0 ],
-		[ "", ANUSVARA, CONS_m+VIRAMA+CONS_m+VIRAMA, 1],
-		[ "", is_consonent, ANUSVARA, 0 ],
-		[ "", is_extension, ANUSVARA, 0],
-		[ "", is_vowel, ANUSVARA, 0 ],
 		[ "", "", CONS_m + VIRAMA, 0 ]
 	];
 
@@ -441,14 +437,15 @@ function handleRtsBackspace(event) {
 	let pchar2 = getChar(currentCursor-2);
 	let cchar = getChar(currentCursor);
 
-	// console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
-
-	if (pchar1 == NON_JOINER) {
-		backspaceChars = 1;
-		pchar1 = getChar(currentCursor-2);
-		pchar2 = getChar(currentCursor-3);
-		// console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
+	//console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
+	let ccur = currentCursor;
+	while (pchar1 == NON_JOINER) {
+		backspaceChars += 1;
+		ccur -= 1
+		pchar1 = getChar(ccur - 1);
+		pchar2 = getChar(ccur - 2);
 	}
+	// console.log("pchar2: " + pchar2 + ", pchar1: " + pchar1 + ", cchar: " + cchar);
 
 	if (is_consonent(pchar1)) {
 		newStr = VIRAMA;
