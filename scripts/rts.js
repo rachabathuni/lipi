@@ -518,16 +518,8 @@ function replaceCharAtCursor(strToInsert, backspaceChars, effectiveStringLength)
 	var cur = getCursorPosition();
 	var txt = gTextarea.val();
 
-	// Let's add a line at the bottom so firefox text
-	// won't jump around. Hack.
-	var lastCrlf = "";
-
-	if (txt[txt.length-1] != "\n") {
-		lastCrlf = "\n";
-	}
-
 	gTextarea.val( txt.substring(0, cur-backspaceChars) + strToInsert
-		+ txt.substring(cur) + lastCrlf);
+		+ txt.substring(cur));
 	var newCursorPos = cur + effectiveStringLength - backspaceChars;
 	//console.log("new cursor pos: " + newCursorPos);
 	setCursorPosition(gTextarea, newCursorPos);
