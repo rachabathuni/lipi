@@ -61,6 +61,19 @@ function closeHelp(e) {
     }
 }
 
+function getTimestamp() {
+    let now = new Date();
+    
+    let YYYY = now.getFullYear();
+    let MM = String(now.getMonth() + 1).padStart(2, "0");  // Months are 0-based
+    let DD = String(now.getDate()).padStart(2, "0");
+    let HH = String(now.getHours()).padStart(2, "0");
+    let mm = String(now.getMinutes()).padStart(2, "0");
+    let SS = String(now.getSeconds()).padStart(2, "0");
+  
+    return `${YYYY}${MM}${DD}${HH}${mm}${SS}`;
+}
+
 
 function saveFile() {
     let text = document.getElementById("edit").value;
@@ -68,7 +81,7 @@ function saveFile() {
     let a = document.createElement("a");
 
     a.href = URL.createObjectURL(blob);
-    a.download = "Lipi_Download.txt";
+    a.download = "Lipi_" + getTimestamp() + ".txt";
 
     // Simulate a click without adding it to the DOM
     a.click();
@@ -198,6 +211,12 @@ function keypressedCallback(e) {
    	setModified(true);
 }
 
+function handleKeyEvent(e) {
+    if ((e.ctrlKey || e.metaKey) && (e.key === "s" || e.key == "S")) {
+        e.preventDefault();
+        saveFile();
+    }
+}
 
 function ready() {
     $("#menuintro").click(handleIntroClick);
@@ -216,6 +235,9 @@ function ready() {
 
     initStorage();
     showIntroOnFirstUse();
+
+    // Monitor for save key
+    document.addEventListener("keydown", handleKeyEvent);
 }
 
 $(document).ready(ready);

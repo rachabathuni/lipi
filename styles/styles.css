@@ -26,8 +26,7 @@ div.header {
     display: flex;
     gap: 40px;
     padding: 0px 10px 0px 10px;
-    margin: 0px 0px 0px 20px;
-    padding-inline-start: 0px;
+    margin: 0px 0px 0px 0px;
 }
 
 .nav-menu li {
