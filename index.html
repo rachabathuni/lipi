@@ -1,117 +1,105 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="te">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Lipi: Online Telugu Unicode Editor</title>
-<link rel="stylesheet" href="styles/styles.css" type="text/css" />
-<script src="scripts/jquery-1.8.3.js"></script>
-<script src="scripts/jquery-ui-1.9.2.custom.js"></script>
-<script src="scripts/rts.js"></script>
-<script src="scripts/lipi.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="images/favicon.png">
-</head>
-
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Lipi: Online Telugu Unicode Editor</title>
+        <link rel="stylesheet" href="styles/styles.css" type="text/css" />
+        <script src="scripts/jquery-1.8.3.js"></script>
+        <script src="scripts/jquery-ui-1.9.2.custom.js"></script>
+        <script src="scripts/rts.js"></script>
+        <script src="scripts/lipi.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="images/favicon.png">
+    </head>
 <body>
-<div id="outer">
-    <div id="header">
-    <h1>&#xc32;&#xc3f;&#xc2a;&#xc3f;/Lipi</h1>
+<div class="outer" id="outer">
+    <div class="header">
+        <h1 class="title">Lipi - Online Telugu Editor</h1>
     </div>
-    <div id="sub-header">
-        <div id="intro-link">
-            <a class="hotspot" href="">
-                <span class="arrow" id="intro-arrow-closed">&#x25BA;</span>
-                <span class="arrow" id="intro-arrow-open">&#x25BC;</span>
-                Introduction
-            </a>
-        </div>
-        <div id="help-link">
-            <a class="hotspot" href="">
-                <span class="arrow" id="help-arrow-closed">&#x25BA;</span>
-                <span class="arrow" id="help-arrow-open">&#x25BC;</span>
-                RTS help
-            </a>
-        </div>
+    <div class="menu">
+        <ul class="nav-menu">
+            <li id="menuintro">Intro</li>
+            <li id="menuhelp">Typing Help</li>
+            <li>
+                <div class="autosave">
+                    <input type="checkbox" id="ascheck" class="ascheck"/>
+                    <span>Auto Save</span>
+                    <div class="saveddiv" id="saveddiv">
+                        <span class="saved" id="saved">🟢</span>
+                    </div>
+                </div>
+            </li>
+            <li id="menucopy">Copy</li>
+            <li id="menudownload">Download</li>
+            <li id="font">
+                <div class="font">
+                    <img id="fontup" class="fontsize" src="images/fontup.png" />
+                    <img id="fontdown" class="fontsize" src="images/fontdown.png" />
+                </div>
+            </li>
+        </ul>
     </div>
-
-    <div id="intro">
-	<p>
-	sailu.com's Lipi తెలుగులో రాసే సదుపాయం కల్పిస్తుంది. కింద కనిపిస్తున్న డబ్బాలో తెలుగులో రాస్తున్నట్టు రాయండి, మీకు తెలుగు అక్షరాలు కనిపిస్తాయి. ఎలా రాయాలో కింద కొన్ని ఉదాహరణలు చూడండి. ఎంత తేలికో మీకే అర్ధం అవుతుంది. ఈ రాసే పద్దతిని RTS పద్దతి అంటారు‌. పక్కన ఉన్న RTS Helpలో పూర్తి వివరాలు చూడండి.
-	</p>
-	<p>
-మీరు రాసిన తెలుగు వాక్యాలని మార్చచ్చు, తప్పులు సరిదిద్దుకోవచ్చు. మీకు నచ్చినట్టుగా వచ్చాక, మొత్తం copy చేసి మీకు కావలిసిన programలో paste చేసుకోవచ్చు.
-	</p>
-	<p>
-ఈ లిపిని వాడటానికి అధునాతనమైన browser ఉండాలి. సరిగా పని చెయ్యకపోతే మీ browser update అవసరం ఉందేమో చూడగలరు.
-	</p>
-<p>
-మీ సలహాలు, సందేహాలు, విన్నపాలు, చీవాట్లు ఇచ్చటికి పంపగలరు: <a href="mailto:lipi@sailu.com" class="email">lipi@sailu.com</a>. ఈ editorని మరింత మందికి ఉపయోగపడేలా తీర్చిదిద్దేందుకు సహాయపడగలరు.
-</p>
-
-
-
-	<h3>ఉదాహరణలు</h3>
-	<table class="examples">
-		<tr>
-			<td>తెలుగు</td><td>telugu</td>
-		</tr>
-		<tr>
-			<td>పారిజాతము</td>
-			<td>pArijAtamu</td>
-		</tr>
-		<tr>
-			<td>అంతఃపురము</td>
-			<td>amta@hpuramu</td>
-		</tr>
-		<tr>
-			<td>పరాక్రమము</td>
-			<td>parAkramamu</td>
-		</tr>
-		<tr>
-			<td>అక్షౌహిణి</td>
-			<td>akshauhiNi</td>
-		</tr>
-		<tr>
-			<td>ప్రకృతి</td>
-			<td>prakRti</td>
-		</tr>
-		<tr>
-			<td>శాంతిపధము</td>
-			<td>SAmtipadhamu</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td></td>
-		</tr>
-	</table>
-
-	<h3>Intro in English</h3>
-	<p>
-	Sailu.com's Lipi is an online Telugu Unicode text editor. It allows you to write and edit Telugu text right in your browser.
-	</p>
-
-	<p>
-	You can type Telugu using English letters. RTS is a popular transliteration scheme. You can find complete list of letter translations in "RTS Help" section.
-	</p>
-
-	<p>
-	This editor requires a modern browser to work since it uses some of the advanced features of browser.  Please make sure you have the latest version of the browser.
-	</p>
-
-	<p>
-	Please send your feedback, bug reports and feature requests to: <a href="mailto:lipi@sailu.com" class="email">lipi@sailu.com</a>. Please help me make this editor better.
-	</p>
-
+    <div id="intro" class="intro">
+        <div class="close" id="introclose">Close ❌</div>
+        <h3>Intro</h3>
+        <p>sailu.com's Lipi తెలుగులో రాసే సదుపాయం కల్పిస్తుంది. కింద కనిపిస్తున్న డబ్బాలో తెలుగులో రాస్తున్నట్టు రాయండి, మీకు తెలుగు అక్షరాలు కనిపిస్తాయి. ఎలా రాయాలో కింద కొన్ని ఉదాహరణలు చూడండి. ఎంత తేలికో మీకే అర్ధం అవుతుంది. ఈ రాసే పద్దతిని RTS పద్దతి అంటారు‌. పక్కన ఉన్న RTS Helpలో పూర్తి వివరాలు చూడండి.
+        </p>
+        <p>మీరు రాసిన తెలుగు వాక్యాలని మార్చచ్చు, తప్పులు సరిదిద్దుకోవచ్చు. మీకు నచ్చినట్టుగా వచ్చాక, మొత్తం copy చేసి మీకు కావలిసిన programలో paste చేసుకోవచ్చు.
+        </p>
+        <p>ఈ లిపిని వాడటానికి అధునాతనమైన browser ఉండాలి. సరిగా పని చెయ్యకపోతే మీ browser update అవసరం ఉందేమో చూడగలరు.
+        </p>
+        <p>మీ సలహాలు, సందేహాలు, విన్నపాలు, చీవాట్లు ఇచ్చటికి పంపగలరు: <a href="mailto:saileshr@gmail.com" class="email">saileshr@gmail.com</a>. 
+            ఈ editorని మరింత మందికి ఉపయోగపడేలా తీర్చిదిద్దేందుకు సహాయపడగలరు.
+        </p>
+    
+        <h3>ఉదాహరణలు</h3>
+        <table class="examples">
+            <tr>
+                <td>పారిజాతము</td>
+                <td>pArijAtamu</td>
+            </tr>
+            <tr>
+                <td>అంతఃపురము</td>
+                <td>amta@hpuramu</td>
+            </tr>
+            <tr>
+                <td>పరాక్రమము</td>
+                <td>parAkramamu</td>
+            </tr>
+            <tr>
+                <td>అక్షౌహిణి</td>
+                <td>akshauhiNi</td>
+            </tr>
+            <tr>
+                <td>ప్రకృతి</td>
+                <td>prakRti</td>
+            </tr>
+            <tr>
+                <td>శాంతిపధము</td>
+                <td>SAMtipadhamu</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    
+        <h3>Intro in English</h3>
+        <p>Sailu.com's Lipi is an online Telugu Unicode text editor. It allows you to write and edit Telugu text right in your browser.
+        </p>
+    
+        <p>You can type Telugu using English letters. RTS is a popular transliteration scheme. You can find complete list of letter translations in "Typing Help" section.
+        </p>
+    
+        <p>Please send your feedback, bug reports and feature requests to: <a href="mailto:saileshr@gmail.com" class="email">saileshr@gmail.com</a>. Please help me make this editor better.
+        </p>
     </div>
 
-    <div id="main">
-        <div id="text">
-            <!-- <form> -->
-                <textarea id="edit" spellcheck="false"></textarea>
-        </div>
-        <div id="help">
-			<!-- achchulu -->
-            <h2>అచ్చులు</h2>
+    <div class="help" id="help">
+        <div class="close" id="helpclose">Close ❌</div>
+        <!-- Achchulu -->
+        <div class="helpbreak">
+            <h3 class="firstrow">అచ్చులు</h3>
             <div class="letter">
                 <div class="english">a</div>
                 <div class="telugu">&#xc05;</div>
@@ -176,9 +164,10 @@
                 <div class="english">a@h</div>
                 <div class="telugu">&#xc05;&#xc03;</div>
             </div>
-
-			<!-- hallulu -->
-            <h2>హల్లులు</h2>
+        </div>
+        <!-- hallulu -->
+        <div class="helpbreak">
+            <h3>హల్లులు</h3>
             <div class="letter">
                 <div class="english">k</div>
                 <div class="telugu">&#xc15;</div>
@@ -199,7 +188,6 @@
                 <div class="english">~m</div>
                 <div class="telugu">&#xc19;</div>
             </div>
-			<div class="clear"></div>
             <div class="letter">
                 <div class="english">c, ch</div>
                 <div class="telugu">&#xc1a;</div>
@@ -228,7 +216,6 @@
                 <div class="english">~n</div>
                 <div class="telugu">&#xc1e;</div>
             </div>
-			<div class="clear"></div>
             <div class="letter">
                 <div class="english">T</div>
                 <div class="telugu">&#xc1f;</div>
@@ -249,7 +236,6 @@
                 <div class="english">N</div>
                 <div class="telugu">&#xc23;</div>
             </div>
-			<div class="clear"></div>
             <div class="letter">
                 <div class="english">t</div>
                 <div class="telugu">&#xc24;</div>
@@ -270,7 +256,6 @@
                 <div class="english">n</div>
                 <div class="telugu">&#xc28;</div>
             </div>
-			<div class="clear"></div>
             <div class="letter">
                 <div class="english">p</div>
                 <div class="telugu">&#xc2a;</div>
@@ -291,7 +276,6 @@
                 <div class="english">m</div>
                 <div class="telugu">&#xc2e;</div>
             </div>
-			<div class="clear"></div>
             <div class="letter">
                 <div class="english">y</div>
                 <div class="telugu">&#xc2f;</div>
@@ -336,50 +320,31 @@
                 <div class="english">~r</div>
                 <div class="telugu">&#xc31;</div>
             </div>
-
-			<!-- pratyekamulu -->
-            <h2>ప్రత్యేకములు</h2>
-			<table class="special">
-				<tr>
-					<td><b>^</b></td>
-					<td>Force split. ఉదాహరణకి "పాన్‌‌డబ్బా‌" రాయాలంటే "pAn^DabbA" అని రాయండి</td>
-				</tr>
-				<tr>
-				<td><b>&amp;</b></td>
-				<td>Force combination. ఉదాహరణకి "తామ్రము" రాయాలంటే "tAm&ramu" అని రాయండి</td>
-			</tr>
-			<tr>
-				<td><b>#</b></td>
-				<td>Switch between Telugu and English. ఉదాహరణకి "ఎర్ర car వచ్చింది" అని రాయాలంటే "erra #car# vachchimdi" అని రాయండి</td>
-			</table>
         </div>
+        <!-- pretyEkamulu -->
+        <div class="helpbreak">
+            <h3>ప్రత్యేకములు</h3>
+            <table class="special">
+                <tr>
+                    <td class="specialsymbol"><b>^</b></td>
+                    <td>Force split. ఉదా. "పాన్‌‌డబ్బా‌": "pAn^DabbA"</td>
+                </tr>
+                <tr>
+                    <td class="specialsymbol"><b>&amp;</b></td>
+                    <td>Force combination. ఉదా. "తామ్రము": "tAm&ramu"</td>
+                </tr>
+                <tr>
+                    <td class="specialsymbol"><b>#</b></td>
+                    <td>Switch between Telugu and English. ఉదా. "ఎర్ర car వచ్చింది": "erra #car# vachchimdi"</td>
+                </tr>
+            </table>
+        </div> 
     </div>
 
-        <div class="clear"></div>
-
-    <div id="bottom">
-        <div class="bottom-buttons">
-            <a href="" id="font-decrease" class="hotspot"><span id="button">-</span></a>
-            Font
-            <a href="" id="font-increase" class="hotspot"><span id="button">+</span></a>
-        </div>
-        <div class="bottom-buttons" id="autosaveblock">
-            <input type="checkbox" id="autosave"> Save automatically</input>
-        </div>
-        <div class="bottom-buttons" id="savestatus">
-			<span id="saved">Saved</span>
-			<span id="modified">Modified</span>
-        </div>
+    <div class="main">
+        <textarea id="edit" class="edit"></textarea>
     </div>
-
-</div>
-<div id="autosavedialog">
-    <h3>Auto-Save</h3>
-	<p>
-		Auto-save వాడితే మీరు రాసినదంతా ప్రతి కొద్ది క్షణాలకి మీ browserలో save చెయ్యబడుతుంది. మీరు browser మూసివేసినా, మళ్ళీ తెరిచినప్పుడు మీరు రాసినది మళ్ళీ కనిపిస్తుంది. మీరు రాసింది ఈ computerలో మాత్రమే ఉంటుంది అని గమనించగలరు. 
-	</p>
 </div>
 </body>
-
 </html>
 

@@ -407,19 +407,14 @@ function setRtsTextarea(tb) {
 function keyDown(event) {
 	if (event.key === 'Backspace') {
 		handleBackspace(event);
+		
+		if (gTextareaCallback) {
+        	gTextareaCallback(event);
+    	}
 	}
 }
 
 function handleBackspace(event) {
-	if (gEntryType == ENGLISH_ENTRY) {
-		return;
-	}
-	else {
-		handleRtsBackspace(event);
-	}
-}
-
-function handleRtsBackspace(event) {
 	let backspaceChars = 0;
 	let newStr = "";
 	let effectiveStringLength = 0;
@@ -478,7 +473,6 @@ function handleRtsBackspace(event) {
 		replaceCharAtCursor(newStr, backspaceChars, effectiveStringLength);
 		event.preventDefault();
 	}
-
 	// dumpTextAreaContent(-1, -1, -1);
 }
 

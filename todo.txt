@@ -1,0 +1,5 @@
+1. Add an icon next to the name
+2. Make Help look better. It's messy right now
+3. Indication that text has been copied upon clicking "copy"
+4. Add "telugu" <-> "english" toggle
+
