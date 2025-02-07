@@ -25,6 +25,7 @@ function toggleIntro() {
     g_introShowing = !g_introShowing;
     if (!g_introShowing) {
         localStorage[LOCALSTORAGE_INTRO_DISMISSED] = true;
+        $("#edit").focus();
     }
 }
 
@@ -51,6 +52,9 @@ function toggleHelp(e) {
     const modal = document.getElementById('help');
     modal.classList.toggle("show");
     g_helpShowing = !g_helpShowing;
+    if (!g_helpShowing) {
+        $("#edit").focus();
+    }
 }
 
 
