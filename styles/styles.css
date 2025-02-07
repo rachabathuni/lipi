@@ -14,11 +14,22 @@ div.outer {
 div.header {
     background: #025f9c;
     display: flex;
-    justify-content: space-between; /* Space between logo and menu */
-    align-items: center;            /* Center items vertically */
+    justify-content: left;
+    align-items: center;
     padding: 0px 10px 0px 10px;
     width: 100%;
     color: white;
+}
+
+img.titleimage {
+    width: 40px;
+    height: 40px;
+}
+
+h1.title {
+    margin: 10px 2px 10px 0px;
+    text-shadow: 1px 1px #009dcb;
+    color: #29aefa;
 }
 
 .nav-menu {
@@ -71,12 +82,6 @@ textarea.edit {
     font-size: 16px;
     line-height: 150%;
     border: solid 1px #025f9c;
-}
-
-h1.title {
-    margin: 10px 2px 10px 10px;
-    text-shadow: 1px 1px #009dcb;
-    color: #29aefa;
 }
 
 div.autosave {
