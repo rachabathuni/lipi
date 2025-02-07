@@ -121,12 +121,43 @@ function initFontSize() {
     setFontSize(fontSize);
 }
 
+function getCursorPosition(textarea) {
+	var el = textarea.get(0);
+	var pos = 0;
+	if ('selectionStart' in el) {
+		pos = el.selectionStart;
+	} else if ('selection' in document) {
+		el.focus();
+		var Sel = document.selection.createRange();
+		var SelLength = document.selection.createRange().text.length;
+		Sel.moveStart('character', -el.value.length);
+		pos = Sel.text.length - SelLength;
+	}
+	return pos;
+}
+
+function setCursorPosition(textarea, pos) {
+	if (textarea.get(0).setSelectionRange) {
+	  textarea.get(0).setSelectionRange(pos, pos);
+	}
+	else if (textarea.get(0).createTextRange) {
+	  var range = textarea.get(0).createTextRange();
+	  range.collapse(true);
+	  range.moveEnd('character', pos);
+	  range.moveStart('character', pos);
+	  range.select();
+	}
+}
+
 
 function copyToClipboard(e) {
     e.preventDefault();
     const tb = $("#edit");
+    const pos = getCursorPosition(tb);
     tb.select();
     navigator.clipboard.writeText(tb.val());
+    tb.get(0).setSelectionRange(0,0);
+    setCursorPosition(tb, pos);
 }
 
 
