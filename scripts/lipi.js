@@ -1,10 +1,10 @@
 var AUTOSAVE_INTERVAL = 1000;
 var LOCALSTORAGE_TEXT = "text";
 var LOCALSTORAGE_AUTOSAVE_ENABLED = "autosaveEnabled";
-var DEFAULT_AUTOSAVE = true;
+var DEFAULT_AUTOSAVE = "true";
 var DEFAULT_FONT_SIZE = 16;
 var LOCALSTORAGE_FONT_SIZE = "fontSize";
-var LOCALSTORAGE_INTRO_DISMISSED = false;
+var LOCALSTORAGE_INTRO_DISMISSED = "introDismissed";
 
 var g_helpShowing = false;
 var g_introShowing = false;
@@ -112,8 +112,9 @@ function decreaseFont(e) {
 
 
 function initFontSize() {
-    let fontSize = localStorage.getItem(LOCALSTORAGE_FONT_SIZE, 0);
-    if (fontSize == 0) {
+    let fontSize = localStorage.getItem(LOCALSTORAGE_FONT_SIZE, "0");
+    g_fontSize = parseInt(fontSize);
+    if (g_fontSize == 0) {
         fontSize = DEFAULT_FONT_SIZE;
     }
 
@@ -132,16 +133,16 @@ function copyToClipboard(e) {
 function autosaveChanged(e) {
     if($("#ascheck").prop('checked')) {
         localStorage[LOCALSTORAGE_TEXT] = $("#edit").val();
-        localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = true;
+        localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = "true";
         setRtsTextareaCallback(keypressedCallback);
 		$("#saved").show();
     }
     else {
         localStorage[LOCALSTORAGE_TEXT]= "";
-        localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = false;
+        localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = "false";
         setRtsTextareaCallback(null);
         window.clearInterval(g_autosaveTimerHandle);
-		$("#savestatus").hide();
+		$("#saved").hide();
     }
 }
 
@@ -149,7 +150,8 @@ function autosaveChanged(e) {
 function initAutosaveFromStorage() {
     const cb = $("#ascheck");
 
-    if(localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED]) {
+    const asEnabled = localStorage.getItem(LOCALSTORAGE_AUTOSAVE_ENABLED, DEFAULT_AUTOSAVE);
+    if(asEnabled == "true") {
         cb.prop('checked', true);
         $("#edit").val(localStorage[LOCALSTORAGE_TEXT]);
         setRtsTextareaCallback(keypressedCallback);
@@ -157,9 +159,22 @@ function initAutosaveFromStorage() {
     }
     else {
         cb.prop('checked', false);
+        $("#saved").hide();
     }
 }
 
+
+function handleAutoSaveClicked(e) {
+    const cb = $("#ascheck");
+    if(cb.prop('checked')) {
+        cb.prop('checked', false);
+    }
+    else {
+        cb.prop('checked', true);
+    }
+
+    autosaveChanged(e);
+}
 
 function initStorage() {
     const cb = $("#ascheck");
@@ -171,6 +186,8 @@ function initStorage() {
     }
 
     cb.change(autosaveChanged);
+    $("#autosavespan").click(handleAutoSaveClicked);
+    $("#saveddiv").click(handleAutoSaveClicked);
 
     if (localStorage.getItem(LOCALSTORAGE_AUTOSAVE_ENABLED) == null) {
         localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = DEFAULT_AUTOSAVE;
