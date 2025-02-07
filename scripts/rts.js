@@ -182,7 +182,7 @@ sm.a =
 		[ "", VIRAMA, "", 1 ],
 		[ "", ANUSVARA, CONS_m, 1 ],
 		[ "", VOW_a, VOW_aa, 1 ],
-		[ "", is_consonent, "", 0 ],
+		[ "", is_consonent, EXT_A, 0 ],
 		[ "", " ", VOW_a, 0 ],
 		[ "", "", VOW_a, 0 ]
 	];
@@ -200,6 +200,7 @@ sm.A =
 sm.e =
 	[
 		[ "", VIRAMA, EXT_e, 1 ],
+		[ "", EXT_e, EXT_E, 1 ],
 		[ "", ANUSVARA, CONS_m + EXT_e, 1 ],
 		[ "", " ", VOW_e, 0 ],
 		[ "", "", VOW_e, 0 ]
@@ -219,6 +220,7 @@ sm.i =
 		[ "", ANUSVARA, CONS_m + EXT_i, 1 ],
 		[ "", is_consonent, EXT_AI, 0],
 		[ "", VIRAMA, EXT_i, 1 ],
+		[ "", EXT_i, EXT_I, 1 ],
 		[ "", " ", VOW_i, 0 ],
 		[ "", "", VOW_i, 0 ]
 	];
@@ -236,6 +238,7 @@ sm.I =
 sm.o = 	
 	[
 		[ "", VIRAMA, EXT_o, 1 ],
+		[ "", EXT_o, EXT_O, 1 ],		
 		[ "", ANUSVARA, CONS_m + EXT_o, 1 ],
 		[ "", " ", VOW_o, 0 ],
 		[ "", "", VOW_o, 0 ]
@@ -256,6 +259,7 @@ sm.u =
 		[ "", is_consonent, EXT_OU, 0],
 		[ "", EXT_o, EXT_OU, 1],
 		[ "", VIRAMA, EXT_u, 1 ],
+		[ "", EXT_u, EXT_U, 1 ],		
 		[ "", VOW_R, VOW_RR, 1 ],
 		[ "", EXT_R, EXT_RR, 1 ],
 		[ "", " ", VOW_u, 0 ],
