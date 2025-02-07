@@ -121,7 +121,7 @@ function initFontSize() {
     setFontSize(fontSize);
 }
 
-function getCursorPosition(textarea) {
+function getCursorPos(textarea) {
 	var el = textarea.get(0);
 	var pos = 0;
 	if ('selectionStart' in el) {
@@ -136,7 +136,7 @@ function getCursorPosition(textarea) {
 	return pos;
 }
 
-function setCursorPosition(textarea, pos) {
+function setCursorPos(textarea, pos) {
 	if (textarea.get(0).setSelectionRange) {
 	  textarea.get(0).setSelectionRange(pos, pos);
 	}
@@ -153,11 +153,11 @@ function setCursorPosition(textarea, pos) {
 function copyToClipboard(e) {
     e.preventDefault();
     const tb = $("#edit");
-    const pos = getCursorPosition(tb);
+    const pos = getCursorPos(tb);
     tb.select();
     navigator.clipboard.writeText(tb.val());
     tb.get(0).setSelectionRange(0,0);
-    setCursorPosition(tb, pos);
+    setCursorPos(tb, pos);
 }
 
 
