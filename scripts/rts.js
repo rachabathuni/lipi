@@ -431,6 +431,10 @@ function handleBackspace(event) {
 		return;
 	}
 
+	if (event.originalEvent.ctrlKey) {
+		return;
+	}
+
 	const currentCursor = getCursorPosition();
 	let pchar1 = getChar(currentCursor-1);
 	let pchar2 = getChar(currentCursor-2);
@@ -579,6 +583,19 @@ function getChar(pos) {
 	}
 }
 
+function deleteSelection() {
+	const selStart = gTextarea.get(0).selectionStart;
+	const selEnd = gTextarea.get(0).selectionEnd;
+	if (selStart != selEnd) {
+		let text = gTextarea.val();
+		gTextarea.val(
+			text.substring(0,selStart)
+			+ text.substring(selEnd, text.length)
+		);
+		setCursorPosition(gTextarea, selStart);
+	}
+}
+
 function rtsEntry(e, currentCursor) {
 	var pchar = getChar(currentCursor-1);
 	var ppchar = getChar(currentCursor-2);
@@ -606,6 +623,9 @@ function rtsEntry(e, currentCursor) {
 		gEntryType = ENGLISH_ENTRY;
 		return 1;
 	}
+
+	// If there is a selection delete it first
+	deleteSelection();
 
 	if (input_sm) {
 		for (var i=0; i<input_sm.length; i++) {
