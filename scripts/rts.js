@@ -728,3 +728,15 @@ function dumpValues(from, to) {
 
 	to.val(out);
 }
+
+function insertString(str) {
+	deleteSelection();
+	const pos = getCursorPosition();
+	const txt = gTextarea.val();
+	gTextarea.val(
+		txt.substring(0, pos)
+		+ str
+		+ txt.substring(pos, txt.length)
+	);
+	setCursorPosition(gTextarea, pos+str.length);
+}

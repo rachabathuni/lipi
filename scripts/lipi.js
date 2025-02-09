@@ -1,10 +1,11 @@
-var AUTOSAVE_INTERVAL = 1000;
-var LOCALSTORAGE_TEXT = "text";
-var LOCALSTORAGE_AUTOSAVE_ENABLED = "autosaveEnabled";
-var DEFAULT_AUTOSAVE = "true";
-var DEFAULT_FONT_SIZE = 16;
-var LOCALSTORAGE_FONT_SIZE = "fontSize";
-var LOCALSTORAGE_INTRO_DISMISSED = "introDismissed";
+const AUTOSAVE_INTERVAL = 1000;
+const LOCALSTORAGE_TEXT = "text";
+const LOCALSTORAGE_AUTOSAVE_ENABLED = "autosaveEnabled";
+const DEFAULT_AUTOSAVE = "true";
+const DEFAULT_FONT_SIZE = 16;
+const LOCALSTORAGE_FONT_SIZE = "fontSize";
+const LOCALSTORAGE_INTRO_DISMISSED = "introDismissed";
+const LOCALSTORAGE_SHORTCUT = "shortcut_"
 
 var g_helpShowing = false;
 var g_introShowing = false;
@@ -254,8 +255,7 @@ function autosaveTimer() {
 	setModified(false);
 }
 
-
-function keypressedCallback(e) {
+function resetKeypressedTimer() {
 	if(g_autosaveTimerHandle)
 		window.clearTimeout(g_autosaveTimerHandle);
 
@@ -263,10 +263,62 @@ function keypressedCallback(e) {
    	setModified(true);
 }
 
+
+function keypressedCallback(e) {
+    resetKeypressedTimer();
+}
+
+function saveShortcut(key) {
+    const MAPPING = {"!": "1", "@": "2", "#": "3", "$": "4", "%": "5", "^": "6", "&": "7", "*": "8", "(": "9", ")": "0"};
+    if (!key in MAPPING) {
+        return;
+    }
+
+    const shortcutName = LOCALSTORAGE_SHORTCUT + MAPPING[key];
+
+    const selStart = $("#edit").get(0).selectionStart;
+	const selEnd = $("#edit").get(0).selectionEnd;
+    if (selStart == selEnd) {
+        // Remove the shortcut
+        localStorage.removeItem(shortcutName);
+    }
+    else {
+        const txt = $("#edit").val();
+        let selection = txt.substring(selStart, selEnd);
+        if (selection != "") {
+            console.log(selection.length);
+            localStorage[shortcutName] = selection;
+        }
+    }
+}
+
+function pasteShortcut(key) {
+    const shortcutName = LOCALSTORAGE_SHORTCUT + key;
+    if (shortcutName != "") {
+        const shortcut = localStorage.getItem(shortcutName);
+        if (shortcut != "") {
+            insertString(shortcut);
+            resetKeypressedTimer();
+        }
+    }
+}
+
 function handleKeyEvent(e) {
-    if ((e.ctrlKey || e.metaKey) && (e.key === "s" || e.key == "S")) {
-        e.preventDefault();
-        saveFile();
+    if (e.ctrlKey ||e.metaKey) {
+        if ((e.key === "s" || e.key == "S")) {
+            e.preventDefault();
+            saveFile();
+        }
+        else if (e.which >= 48 && e.which <= 57 ) {
+            if (e.shiftKey) {
+                e.preventDefault();
+                saveShortcut(e.key);
+            }
+            else {
+                e.preventDefault();
+                pasteShortcut(e.key);
+            }
+        }
     }
 }
 
