@@ -9,10 +9,20 @@ const LOCALSTORAGE_SHORTCUT = "shortcut_"
 
 var g_helpShowing = false;
 var g_introShowing = false;
+var g_scInfoShowing = false;
 var g_fontSize = DEFAULT_FONT_SIZE;
 var g_autosaveTimerHandle = null;
 var g_modified = false;
+var g_showShortcutMenu = false;
 
+
+function getLocalstorageItem(itemName, defaultValue) {
+    let ret = localStorage.getItem(itemName);
+    if (ret == null) {
+        ret = defaultValue;
+    }
+    return ret;
+}
 
 function handleIntroClick(e) {
     e.preventDefault();
@@ -40,10 +50,25 @@ function closeIntro(e) {
 
 
 function showIntroOnFirstUse() {
-    if (!localStorage.getItem(LOCALSTORAGE_INTRO_DISMISSED, false)) {
+    if (!getLocalstorageItem(LOCALSTORAGE_INTRO_DISMISSED, false)) {
         if (!g_introShowing) {
             toggleIntro();
         }
+    }
+}
+
+
+function toggleScInfo(e) {
+    e.preventDefault();
+    const modal = document.getElementById('scinfo');
+    modal.classList.toggle("show");
+    g_scInfoShowing = !g_scInfoShowing;
+    if (g_scInfoShowing) {
+        showShortcutMenu();
+    }
+    else {
+        $("#edit").focus();
+        hideShortcutMenu();
     }
 }
 
@@ -117,7 +142,7 @@ function decreaseFont(e) {
 
 
 function initFontSize() {
-    let fontSize = localStorage.getItem(LOCALSTORAGE_FONT_SIZE, "0");
+    let fontSize = getLocalstorageItem(LOCALSTORAGE_FONT_SIZE, "0");
     g_fontSize = parseInt(fontSize);
     if (g_fontSize == 0) {
         fontSize = DEFAULT_FONT_SIZE;
@@ -186,7 +211,7 @@ function autosaveChanged(e) {
 function initAutosaveFromStorage() {
     const cb = $("#ascheck");
 
-    const asEnabled = localStorage.getItem(LOCALSTORAGE_AUTOSAVE_ENABLED, DEFAULT_AUTOSAVE);
+    const asEnabled = getLocalstorageItem(LOCALSTORAGE_AUTOSAVE_ENABLED, DEFAULT_AUTOSAVE);
     if(asEnabled == "true") {
         cb.prop('checked', true);
         $("#edit").val(localStorage[LOCALSTORAGE_TEXT]);
@@ -268,8 +293,35 @@ function keypressedCallback(e) {
     resetKeypressedTimer();
 }
 
+function getShortcutDisplayText(text) {
+    let ret = text;
+    if (text.length > 10) {
+        ret = truncateText(text, 10);
+        ret = ret + " ...";
+    }
+    return ret;
+}
+
+
+function updateShortcutsMenu() {
+    g_showShortcutMenu = false;
+    for (let i=1; i<=9; i++) {
+        const liId = "#shortcut" + i;
+        const shortcutName = LOCALSTORAGE_SHORTCUT + i;
+        const shortcutText = getLocalstorageItem(shortcutName, "");
+        let displayText = shortcutText;
+        if (shortcutText != "") {
+            displayText = getShortcutDisplayText(shortcutText);
+            g_showShortcutMenu = true;
+        }
+        displayText = i + ": " + displayText;
+        $(liId).text(displayText);
+    }
+}
+
+
 function saveShortcut(key) {
-    const MAPPING = {"!": "1", "@": "2", "#": "3", "$": "4", "%": "5", "^": "6", "&": "7", "*": "8", "(": "9", ")": "0"};
+    const MAPPING = {"!": "1", "@": "2", "#": "3", "$": "4", "%": "5", "^": "6", "&": "7", "*": "8", "(": "9"};
     if (!key in MAPPING) {
         return;
     }
@@ -281,30 +333,40 @@ function saveShortcut(key) {
     if (selStart == selEnd) {
         // Remove the shortcut
         localStorage.removeItem(shortcutName);
+        updateShortcutsMenu();
+        if (!g_showShortcutMenu) {
+            hideShortcutMenu();
+        }
     }
     else {
         const txt = $("#edit").val();
         let selection = txt.substring(selStart, selEnd);
-        if (selection != "") {
-            console.log(selection.length);
-            localStorage[shortcutName] = selection;
-        }
+        localStorage[shortcutName] = selection;
+        updateShortcutsMenu();
+        showShortcutMenu();
     }
 }
+
 
 function pasteShortcut(key) {
     const shortcutName = LOCALSTORAGE_SHORTCUT + key;
-    if (shortcutName != "") {
-        const shortcut = localStorage.getItem(shortcutName);
-        if (shortcut != "") {
-            insertString(shortcut);
-            resetKeypressedTimer();
-        }
+    const shortcut = localStorage.getItem(shortcutName);
+    if (shortcut != null) {
+        insertString(shortcut);
+        resetKeypressedTimer();
     }
 }
 
-function handleKeyEvent(e) {
+
+function handleKeyDown(e) {
     if (e.ctrlKey ||e.metaKey) {
+        if (e.repeat) {
+            return;
+        }
+        else if (g_showShortcutMenu) {
+            showShortcutMenu();
+        }
+
         if ((e.key === "s" || e.key == "S")) {
             e.preventDefault();
             saveFile();
@@ -322,9 +384,43 @@ function handleKeyEvent(e) {
     }
 }
 
+
+function handleKeyUp(e) {
+    if (e.key == "Control" || e.key == "Meta") {
+        hideShortcutMenu();
+    }
+}
+
+
+function showShortcutMenu() {
+    let position = getShortcutMenuPos();
+    let shortcutdiv = document.getElementById("shortcutdiv");
+    shortcutdiv.style.left = position.x + "px";
+    shortcutdiv.style.top = position.y + "px";
+    shortcutdiv.style.display = "block";
+  }
+
+
+function hideShortcutMenu() {
+    let shortcutdiv = document.getElementById("shortcutdiv");
+    shortcutdiv.style.display = "none";
+}
+
+
+function getShortcutMenuPos() {
+    const edit = document.getElementById("edit");
+    let rect = edit.getBoundingClientRect();
+    x = rect.left + rect.width + 5;
+    y = rect.top;
+    return { x, y };
+}
+
+
 function ready() {
     $("#menuintro").click(handleIntroClick);
     $("#menuhelp").click(toggleHelp);
+    $("#menuscinfo").click(toggleScInfo);
+    $("#scinfoclose").click(toggleScInfo);
     $("#introclose").click(closeIntro);
     $("#helpclose").click(closeHelp);
     $("#menucopy").click(copyToClipboard);
@@ -341,7 +437,10 @@ function ready() {
     showIntroOnFirstUse();
 
     // Monitor for save key
-    document.addEventListener("keydown", handleKeyEvent);
+    const edit = document.getElementById("edit");
+    edit.addEventListener("keydown", handleKeyDown);
+    edit.addEventListener("keyup", handleKeyUp);
+    updateShortcutsMenu();
 }
 
 $(document).ready(ready);

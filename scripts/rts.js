@@ -740,3 +740,31 @@ function insertString(str) {
 	);
 	setCursorPosition(gTextarea, pos+str.length);
 }
+
+function truncateText(text, maxChars) {
+	if (text.length <= maxChars) {
+		return text;
+	}
+
+	if (maxChars == 0) {
+		return "";
+	}
+
+	let pchar = "";
+	let cutoff = 0;
+	for (let i=0; i< maxChars+1; i++) {
+		if (is_vowel(text[i])) {
+			cutoff = i + 1;
+		}
+		else if(is_consonent(text[i]) && (pchar != VIRAMA)) {
+			cutoff = i;
+		}
+		else if(text[i] == " ") {
+			cutoff = i + 1;
+		}
+
+		pchar = text[i];
+	}
+
+	return text.substring(0, cutoff);
+}

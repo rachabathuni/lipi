@@ -124,10 +124,21 @@ div.helpbreak h3 {
     margin: 0px;
   }
 
-  div.intro h3, div.helpbreak h3.firstrow {
+div.scinfo h3, div.intro h3, div.helpbreak h3.firstrow {
     padding: 0px 10px 10px 0px;
     margin: 0px;
-  }
+}
+
+div.scinfo p {
+    padding: 0px 0px 0px 0px;
+    margin: 0px;
+}
+
+div.scinfo h4 {
+    padding: 10px 0px 0px 0px;
+    margin: 0px;
+}
+
 
 
 div.letter {
@@ -179,7 +190,7 @@ div.close {
     padding: 3px 10px 0px 0px;
 }
 
-div.intro {
+div.scinfo, div.intro {
     width: 100%;
     background-color: azure;
     max-height: 0;
@@ -190,7 +201,7 @@ div.intro {
     flex-shrink: 0;
 }
 
-.intro.show {
+.scinfo.show, .intro.show {
     max-height: 1000px; /* Adjust based on content height */
 }
 
@@ -214,4 +225,35 @@ img.fontsize {
 
 .fontsize:hover {
     opacity: 1.0;
+}
+
+div.shortcutdiv {
+    position: absolute;
+    background: #afebff;
+    color: #333333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none; /* Initially hidden */
+    white-space: nowrap;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    min-width: 100px;
+}
+
+/* Vertical Menu Styles */
+.shortcut-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.shortcut-menu li {
+    padding: 0px 0px 12px 0px;
+    border-radius: 3px;
+    transition: background 0.3s;
+}
+
+h4.shortcutheader {
+    padding: 0px 0px 5px 0px;
+    margin: 0px;
 }

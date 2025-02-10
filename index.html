@@ -21,6 +21,7 @@
         <ul class="nav-menu">
             <li id="menuintro">Intro</li>
             <li id="menuhelp">Typing Help</li>
+            <li id="menuscinfo">Shortcuts</li>
             <li>
                 <div class="autosave">
                     <input type="checkbox" id="ascheck" class="ascheck"/>
@@ -344,10 +345,42 @@
             </table>
         </div> 
     </div>
+    <div id="scinfo" class="scinfo">
+        <div class="close" id="scinfoclose">Close ❌</div>
+        <h3>Shortcuts</h3>
+        <p>
+            తరచుగా వాడే పదాలని తేలికగా enter చేయటానికి shortcuts సయాయపడతాయి.
+            ఉదాయరణకి ఒక కథ రాస్తుంటే, అందులోని పాత్రల పేర్లు shortcutsగా save‌ చేసుకోవచ్చు.
+            ఇది copy-paste‌ లాగానే, కానీ ఒకే సారి అనేక పదాలు save చేసుకోవచ్చు.
+        </p>
+        <h4>Save shortcut</h4>
+        <p>
+            ఏదైనా పదంకానీ, వాక్యంకానీ select చేసుకొని Ctrl+Shift+[number] నొక్కండి.
+                ఉదాయరణకి Ctrl+‌Shift+1. మీరు ‌select చేసుకున్న పదాలు shortcut ‌1 లో save చేయబడతాయి.
+        </p>
+        <h4>Paste shortcut</h4>
+        <p>
+            Ctrl+[n‌umber] నొక్కితే, ఆ‌ shortcut ‌లో ఉన్న పదాలు paste అవుతాయి. ఉదాహరణకి shortcut 1‌ లో ఉన్న పదాలు paste అవ్వాలంటే Ctr‌l+1 నొక్కండి.
+        </p>
+    </div>
 
     <div class="main">
         <textarea id="edit" class="edit"></textarea>
     </div>
+</div>
+<div id="shortcutdiv" class="shortcutdiv">
+    <h4 class="shortcutheader">Shortcuts</h4>
+    <ul class="shortcut-menu">
+        <li id="shortcut1"></li>
+        <li id="shortcut2"></li>
+        <li id="shortcut3"></li>
+        <li id="shortcut4"></li>
+        <li id="shortcut5"></li>
+        <li id="shortcut6"></li>
+        <li id="shortcut7"></li>
+        <li id="shortcut8"></li>
+        <li id="shortcut9"></li>
+      </ul>
 </div>
 </body>
 </html>
