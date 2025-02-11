@@ -201,8 +201,12 @@ div.scinfo, div.intro {
     flex-shrink: 0;
 }
 
-.scinfo.show, .intro.show {
-    max-height: 500px; /* Adjust based on content height */
+.intro.show {
+    max-height: 750px; /* Adjust based on content height */
+}
+
+.scinfo.show {
+    max-height: 400px;
 }
 
 a.email {
@@ -256,4 +260,16 @@ div.shortcutdiv {
 h4.shortcutheader {
     padding: 0px 0px 5px 0px;
     margin: 0px;
+}
+
+div.tooltip {
+    position: absolute;
+    background: #025f9c;
+    color: #cccccc;
+    padding: 5px 5px 4px 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none; /* Initially hidden */
+    white-space: nowrap;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }

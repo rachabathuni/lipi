@@ -189,6 +189,7 @@ function copyToClipboard(e) {
     navigator.clipboard.writeText(tb.val());
     tb.get(0).setSelectionRange(0,0);
     setCursorPos(tb, pos);
+    showTooltip("menucopy", "Copied");
 }
 
 
@@ -411,11 +412,37 @@ function hideShortcutMenu() {
 }
 
 
+function showTooltip(nextToElementId, tooltipText) {
+    elem = document.getElementById(nextToElementId);
+    let rect = elem.getBoundingClientRect();
+    let x = rect.left;
+    let y = rect.top + rect.height + 5;
+
+    let tooltip = document.getElementById("tooltip");
+    $("#tooltip").text(tooltipText);
+    let trect = tooltip.getBoundingClientRect();
+    console.log(trect);
+
+    tooltip.style.left = x + "px";
+    tooltip.style.top = y + "px";
+    tooltip.style.display = "block";
+
+    setTimeout(hideTooltip, 700);
+  }
+
+
+function hideTooltip() {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.style.display = "none";
+}
+
+
+
 function getShortcutMenuPos() {
     const edit = document.getElementById("edit");
     let rect = edit.getBoundingClientRect();
-    x = rect.left + rect.width + 5;
-    y = rect.top;
+    let x = rect.left + rect.width + 5;
+    let y = rect.top;
     return { x, y };
 }
 
