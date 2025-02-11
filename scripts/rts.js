@@ -399,7 +399,6 @@ var mapping = [
 /* GLOBAL VARIABLES */
 var gEntryType = RTS_ENTRY;
 var gTextarea;
-var gTextareaCallback = null;
 
 // Call this method with a jquery textbox to make the texbox RTS entry
 function setRtsTextarea(tb) {
@@ -411,10 +410,6 @@ function setRtsTextarea(tb) {
 function keyDown(event) {
 	if (event.key === 'Backspace') {
 		handleBackspace(event);
-		
-		if (gTextareaCallback) {
-        	gTextareaCallback(event);
-    	}
 	}
 }
 
@@ -484,9 +479,6 @@ function handleBackspace(event) {
 	// dumpTextAreaContent(-1, -1, -1);
 }
 
-function setRtsTextareaCallback(callback) {
-    gTextareaCallback = callback;
-}
 
 function getCursorPosition() {
 	var el = gTextarea.get(0);
@@ -688,10 +680,6 @@ function keyPressed(e) {
 	// TODO: Optimize this. We don't need to call this multiple times
 	var currentCursor = getCursorPosition();
 	var prevent;
-
-    if (gTextareaCallback) {
-        gTextareaCallback(e);
-    }
 
 	if (e.altKey) {
 		return;

@@ -14,6 +14,7 @@ var g_fontSize = DEFAULT_FONT_SIZE;
 var g_autosaveTimerHandle = null;
 var g_modified = false;
 var g_showShortcutMenu = false;
+var g_autosaveEnabled = false;
 
 
 function getLocalstorageItem(itemName, defaultValue) {
@@ -195,15 +196,15 @@ function autosaveChanged(e) {
     if($("#ascheck").prop('checked')) {
         localStorage[LOCALSTORAGE_TEXT] = $("#edit").val();
         localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = "true";
-        setRtsTextareaCallback(keypressedCallback);
 		$("#saved").show();
+        g_autosaveEnabled = true;
     }
     else {
         localStorage[LOCALSTORAGE_TEXT]= "";
         localStorage[LOCALSTORAGE_AUTOSAVE_ENABLED] = "false";
-        setRtsTextareaCallback(null);
         window.clearInterval(g_autosaveTimerHandle);
 		$("#saved").hide();
+        g_autosaveEnabled = false;
     }
 }
 
@@ -215,12 +216,13 @@ function initAutosaveFromStorage() {
     if(asEnabled == "true") {
         cb.prop('checked', true);
         $("#edit").val(localStorage[LOCALSTORAGE_TEXT]);
-        setRtsTextareaCallback(keypressedCallback);
         $("#saved").show();
+        g_autosaveEnabled = true;
     }
     else {
         cb.prop('checked', false);
         $("#saved").hide();
+        g_autosaveEnabled = false;
     }
 }
 
@@ -281,17 +283,16 @@ function autosaveTimer() {
 }
 
 function resetKeypressedTimer() {
-	if(g_autosaveTimerHandle)
-		window.clearTimeout(g_autosaveTimerHandle);
+    if (g_autosaveEnabled) {
+	    if(g_autosaveTimerHandle) {
+		    window.clearTimeout(g_autosaveTimerHandle);
+        }
 
-   	g_autosaveTimerHandle = window.setTimeout(autosaveTimer, AUTOSAVE_INTERVAL);
-   	setModified(true);
+        g_autosaveTimerHandle = window.setTimeout(autosaveTimer, AUTOSAVE_INTERVAL);
+        setModified(true);
+    }
 }
 
-
-function keypressedCallback(e) {
-    resetKeypressedTimer();
-}
 
 function getShortcutDisplayText(text) {
     let ret = text;
@@ -381,6 +382,9 @@ function handleKeyDown(e) {
                 pasteShortcut(e.key);
             }
         }
+    }
+    else {
+        resetKeypressedTimer();
     }
 }
 
