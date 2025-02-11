@@ -41,11 +41,10 @@ h1.title {
 }
 
 .nav-menu li {
-    text-decoration: none;          /* Remove underline */
+    text-decoration: none;
     color: #444444;
-    padding: 8px 12px;
-    transition: background 0.3s;    /* Smooth hover effect */
-    padding: 5px 0px 5px 0px;
+    transition: background 0.3s;
+    padding: 5px 0px 0px 0px;
     font-size: 15px;
     cursor: pointer;
 }
@@ -221,13 +220,14 @@ div.font {
     gap: 5px;
 }
 
-img.fontsize {
+img.printer, img.fontsize {
     width: 20px;
     height: 20px;
     opacity: 0.6;
+    padding: 0px;
 }
 
-.fontsize:hover {
+.printer:hover, .fontsize:hover {
     opacity: 1.0;
 }
 

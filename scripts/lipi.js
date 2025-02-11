@@ -122,6 +122,34 @@ function saveFile() {
  }
 
 
+function printContent() {
+    let text = document.getElementById("edit").value;
+    text = text.replaceAll("\n", "<br/>");
+
+    // Open a new blank window
+    let printWindow = window.open("", "_blank");
+
+    // Write the content inside the new window
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title>Lipi - Online Telugu Editor<\/title>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="images/favicon.png">
+        <style>
+          body { font-family: 'Noto Sans Telugu', Verdana, Geneva, Tahoma, sans-serif; line-height: 150%; font-size: ${g_fontSize};}
+        <\/style>
+      <\/head>
+      <body>
+        ${text}
+        <script>
+          window.onload = function() { window.print(); }
+        <\/script>
+      <\/body>
+      <\/html>
+    `);
+}
+
 function setFontSize(size) {
     $("#edit").css("font-size", size + "px");
     localStorage[LOCALSTORAGE_FONT_SIZE] = size;
@@ -466,6 +494,7 @@ function ready() {
     $("#helpclose").click(closeHelp);
     $("#menucopy").click(copyToClipboard);
     $("#menudownload").click(saveFile);
+    $("#menuprint").click(printContent);
 
     initFontSize();
     $("#fontup").click(increaseFont);
