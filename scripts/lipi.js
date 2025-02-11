@@ -416,6 +416,16 @@ function getShortcutMenuPos() {
 }
 
 
+function handleBlur(e) {
+    hideShortcutMenu();
+}
+
+function handleTextboxFocus(e) {
+    if (g_scInfoShowing) {
+        toggleScInfo(e);
+    }
+}
+
 function ready() {
     $("#menuintro").click(handleIntroClick);
     $("#menuhelp").click(toggleHelp);
@@ -440,6 +450,8 @@ function ready() {
     const edit = document.getElementById("edit");
     edit.addEventListener("keydown", handleKeyDown);
     edit.addEventListener("keyup", handleKeyUp);
+    window.addEventListener('blur', handleBlur);
+    $("#edit").focus(handleTextboxFocus);
     updateShortcutsMenu();
 }
 

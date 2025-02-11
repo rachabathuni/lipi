@@ -202,7 +202,7 @@ div.scinfo, div.intro {
 }
 
 .scinfo.show, .intro.show {
-    max-height: 1000px; /* Adjust based on content height */
+    max-height: 500px; /* Adjust based on content height */
 }
 
 a.email {
