@@ -137,11 +137,19 @@ function printContent() {
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="images/favicon.png">
         <style>
-          body { font-family: 'Noto Sans Telugu', Verdana, Geneva, Tahoma, sans-serif; line-height: 150%; font-size: ${g_fontSize};}
+        body {margin: auto;}
+          div.content { font-family: 'Noto Sans Telugu', Verdana, Geneva, Tahoma, sans-serif; 
+          line-height: 150%; 
+          font-size: ${g_fontSize};
+          width: 850px;
+          text-align: justify;
+          margin: auto;
+          }
         <\/style>
       <\/head>
-      <body>
+      <body><div class="content">
         ${text}
+        </div>
         <script>
           window.onload = function() { window.print(); }
         <\/script>
