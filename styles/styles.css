@@ -16,7 +16,7 @@ div.header {
     display: flex;
     justify-content: left;
     align-items: center;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 11px 0px 11px;
     width: 100%;
     color: white;
 }
@@ -24,12 +24,14 @@ div.header {
 img.titleimage {
     width: 40px;
     height: 40px;
+    padding: 0px 0px 0px 10px;
 }
 
 h1.title {
     margin: 10px 2px 10px 0px;
     text-shadow: 1px 1px #009dcb;
     color: #29aefa;
+    padding: 10px 0px 0px 5px;
 }
 
 .nav-menu {
@@ -50,8 +52,6 @@ h1.title {
 }
 
 .nav-menu li:hover {
-    /* color: #888888; */
-    /* text-shadow: 1px 1px #cccccc; */
     font-weight: bold;
     border-radius: 4px;
 }
@@ -66,7 +66,7 @@ div.main {
 div.menu {
     width: 100%;
     background: #afebff;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 11px 0px 11px;
     flex-grow: 0;
     flex-shrink: 0;
     display: flex;
@@ -99,16 +99,6 @@ span.saved {
     font-size: 12px;
 }
 
-div.help {
-    width: 100%;
-    background-color: azure;
-    max-height: 0;
-    transition: max-height 0.5s ease-out, padding 0.5s ease-out;
-    overflow: hidden;
-    padding: 0px 10px 0px 10px;
-    flex-grow: 0;
-    flex-shrink: 0;
-}
 
 .help.show {
     max-height: 500px; /* Adjust based on content height */
@@ -189,7 +179,7 @@ div.close {
     padding: 3px 10px 0px 0px;
 }
 
-div.scinfo, div.intro {
+div.help, div.scinfo, div.intro {
     width: 100%;
     background-color: azure;
     max-height: 0;
@@ -198,10 +188,11 @@ div.scinfo, div.intro {
     padding: 0px 10px 0px 10px;
     flex-grow: 0;
     flex-shrink: 0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);    
 }
 
 .intro.show {
-    max-height: 750px; /* Adjust based on content height */
+    max-height: 750px;
 }
 
 .scinfo.show {
