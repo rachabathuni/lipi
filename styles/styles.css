@@ -101,7 +101,7 @@ span.saved {
 
 
 .help.show {
-    max-height: 500px; /* Adjust based on content height */
+    max-height: 600px; /* Adjust based on content height */
 }
 
 div.helpbreak {
@@ -111,7 +111,13 @@ div.helpbreak {
 div.helpbreak h3 {
     padding: 10px 0px 10px 0px;
     margin: 0px;
-  }
+    text-decoration: underline;
+}
+
+div.helpbreak p {
+    margin: 0px;
+    padding: 0px;
+}
 
 div.scinfo h3, div.intro h3, div.helpbreak h3.firstrow {
     padding: 0px 10px 10px 0px;
