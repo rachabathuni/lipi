@@ -611,7 +611,7 @@ function rtsEntry(e, currentCursor) {
 		return 0;
 	}
 
-	if (input === "#") {
+	if (input === "`") {
 		gEntryType = ENGLISH_ENTRY;
 		if (g_langChangeCallback) {
 			g_langChangeCallback(gEntryType);
@@ -671,7 +671,7 @@ function rtsEntry(e, currentCursor) {
 
 function englishEntry(e, currentCursor) {
 	var input = String.fromCharCode(e.which);
-	if (input === "#") {
+	if (input === "`") {
 		gEntryType = RTS_ENTRY;
 		if (g_langChangeCallback) {
 			g_langChangeCallback(gEntryType);
