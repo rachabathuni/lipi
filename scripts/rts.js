@@ -88,13 +88,13 @@ var EXT_u = "\u0C41";
 var ZERO_WIDTH_SPACE = "\u200B";
 var ZERO_WIDTH_NON_JOINER = "\u200c";
 var THIN_SPACE = "\u2009";
-
 var NON_JOINER = ZERO_WIDTH_NON_JOINER;
 
 var RTS_ENTRY = 1;
 var ENGLISH_ENTRY = 2;
 
 var sm = {};
+var g_langChangeCallback = null;
 
 function is_consonent(ch) {
 	return (ch>=CONS_k && ch<=CONS_h);
@@ -613,6 +613,9 @@ function rtsEntry(e, currentCursor) {
 
 	if (input === "#") {
 		gEntryType = ENGLISH_ENTRY;
+		if (g_langChangeCallback) {
+			g_langChangeCallback(gEntryType);
+		}
 		return 1;
 	}
 
@@ -670,6 +673,9 @@ function englishEntry(e, currentCursor) {
 	var input = String.fromCharCode(e.which);
 	if (input === "#") {
 		gEntryType = RTS_ENTRY;
+		if (g_langChangeCallback) {
+			g_langChangeCallback(gEntryType);
+		}
 		return 1;
 	}
 
@@ -755,4 +761,8 @@ function truncateText(text, maxChars) {
 	}
 
 	return text.substring(0, cutoff);
+}
+
+function setLangChangeCallback(callback) {
+	g_langChangeCallback = callback;
 }

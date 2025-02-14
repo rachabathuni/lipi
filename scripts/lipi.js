@@ -509,6 +509,17 @@ function checkMobile() {
     }
 }
 
+
+function langeChangeCallback(newLang) {
+    const edit = document.getElementById("edit");
+    if (newLang == ENGLISH_ENTRY) {
+        edit.classList.add("hilight");
+    }
+    else {
+        edit.classList.remove("hilight");
+    }
+}
+
 function ready() {
     $("#menuintro").click(handleIntroClick);
     $("#menuhelp").click(toggleHelp);
@@ -526,6 +537,7 @@ function ready() {
 	
 	setRtsTextarea($("#edit"));
     $('#edit').focus();
+    setLangChangeCallback(langeChangeCallback);
 
     initStorage();
     showIntroOnFirstUse();
