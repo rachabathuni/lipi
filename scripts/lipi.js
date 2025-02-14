@@ -487,9 +487,25 @@ function handleBlur(e) {
     hideShortcutMenu();
 }
 
+
 function handleTextboxFocus(e) {
     if (g_scInfoShowing) {
         toggleScInfo(e);
+    }
+}
+
+
+function isMobileDevice() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+}
+
+
+function checkMobile() {
+    if (isMobileDevice()) {
+        const mainDiv = document.getElementById("main");
+        mainDiv.style.display = "none";
+        const mobileAlert = document.getElementById("mobilealert");
+        mobileAlert.style.display = "block";
     }
 }
 
@@ -521,6 +537,8 @@ function ready() {
     window.addEventListener('blur', handleBlur);
     $("#edit").focus(handleTextboxFocus);
     updateShortcutsMenu();
+
+    checkMobile();
 }
 
 $(document).ready(ready);

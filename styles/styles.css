@@ -264,3 +264,11 @@ div.tooltip {
     white-space: nowrap;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+div.mobilealert {
+    font-family: 'Noto Sans Telugu', Verdana, Geneva, Tahoma, sans-serif;
+    display: none;
+    font-size: 20px;
+    text-align: center;
+    padding: 30px;
+}
