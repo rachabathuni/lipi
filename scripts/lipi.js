@@ -457,7 +457,6 @@ function showTooltip(nextToElementId, tooltipText) {
     let tooltip = document.getElementById("tooltip");
     $("#tooltip").text(tooltipText);
     let trect = tooltip.getBoundingClientRect();
-    console.log(trect);
 
     tooltip.style.left = x + "px";
     tooltip.style.top = y + "px";
