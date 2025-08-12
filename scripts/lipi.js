@@ -360,7 +360,7 @@ function updateShortcutsMenu() {
 
 function saveShortcut(key) {
     const MAPPING = {"!": "1", "@": "2", "#": "3", "$": "4", "%": "5", "^": "6", "&": "7", "*": "8", "(": "9"};
-    if (!key in MAPPING) {
+    if (!(key in MAPPING)) {
         return;
     }
 
