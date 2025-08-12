@@ -260,7 +260,6 @@ sm.u =
 		[ "", EXT_o, EXT_OU, 1],
 		[ "", VIRAMA, EXT_u, 1 ],
 		[ "", EXT_u, EXT_U, 1 ],		
-		[ "", VOW_R, VOW_RR, 1 ],
 		[ "", EXT_R, EXT_RR, 1 ],
 		[ "", " ", VOW_u, 0 ],
 		[ "", "", VOW_u, 0 ]
