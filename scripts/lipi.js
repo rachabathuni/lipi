@@ -541,7 +541,7 @@ function ready() {
     initStorage();
     showIntroOnFirstUse();
 
-    // Monitor for save key
+    // Set up keyboard shortcuts for saving files, managing snippets, and toggling the shortcut menu
     const edit = document.getElementById("edit");
     edit.addEventListener("keydown", handleKeyDown);
     edit.addEventListener("keyup", handleKeyUp);
